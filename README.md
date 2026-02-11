@@ -1,6 +1,6 @@
 # 📘 Facebook Clone
 
-A full-featured **Facebook clone** built with PHP, MySQL, and vanilla CSS. This project replicates core Facebook functionalities including user authentication, news feed, post creation, likes, comments, and a responsive UI with stories, sidebars, and contact lists.
+A full-featured **Facebook clone** built with PHP, MySQL, and BoostTrap CSS. This project replicates core Facebook functionalities including user authentication, news feed, post creation, likes, comments, and a responsive UI with stories, sidebars, and contact lists.
 
 ---
 
@@ -143,7 +143,7 @@ The project uses **5 tables** in the `facebook_clone` database:
 
 | Layer | Technology |
 |---|---|
-| **Frontend** | HTML5, CSS3 (Custom Properties), Vanilla JavaScript |
+| **Frontend** | HTML5, CSS3 (Custom Properties), Vanilla JavaScript, Bootstrap 5.3.3 (CDN), Bootstrap Icons |
 | **Backend** | PHP 7.4+ (PDO for database) |
 | **Database** | MySQL with foreign keys and cascading deletes |
 | **Server** | Apache (XAMPP) |
