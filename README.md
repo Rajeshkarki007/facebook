@@ -1,6 +1,6 @@
 # 📘 Facebook Clone
 
-A full-featured **Facebook clone** built with PHP, MySQL, and BoostTrap CSS. This project replicates core Facebook functionalities including user authentication, news feed, post creation, likes, comments, and a responsive UI with stories, sidebars, and contact lists.
+A full-featured **Facebook clone** built with PHP, MySQL, and Bootstrap 5. This project replicates core Facebook functionalities including user authentication, news feed, profiles, messaging, friend system, and a responsive premium UI.
 
 ---
 
@@ -14,13 +14,20 @@ A full-featured **Facebook clone** built with PHP, MySQL, and BoostTrap CSS. Thi
 | **Like / Unlike** | Toggle likes on posts with live count |
 | **Comments** | Add comments on posts with threaded display |
 | **Delete Posts** | Post owners can delete their own posts |
+| **User Profiles** | Profile page with cover photo, bio, posts, and friend list |
+| **Friend System** | Send/accept/reject friend requests, unfriend, people suggestions |
+| **Chat / Messenger** | **AJAX-powered** real-time messaging (no page reloads) |
+| **Search** | Search users by name or email with friend status badges |
+| **Settings** | Edit profile (name, bio, gender), change password, delete account |
+| **Logout Confirmation** | Confirmation page before logout + goodbye screen |
 | **Stories Section** | Visual story cards at the top of the feed |
 | **Left Sidebar** | Navigation menu (Friends, Groups, Marketplace, Watch, etc.) |
 | **Right Sidebar** | Sponsored ads + Contacts list with online indicators |
-| **Profile Dropdown** | User profile menu with logout option |
+| **Profile Dropdown** | User profile menu with links to Profile, Settings, Logout |
 | **Responsive UI** | Mobile-friendly design with Facebook's signature blue theme |
 | **XSS Protection** | All output sanitized with `htmlspecialchars()` |
 | **Time Ago** | Human-readable timestamps (e.g., "5 minutes ago") |
+| **Educational Code** | **Heavily commented** source code to help beginners learn PHP & AJAX |
 
 ---
 
@@ -31,14 +38,19 @@ facebook/
 │
 ├── assets/
 │   └── css/
-│       └── style.css           # Complete stylesheet (navbar, feed, sidebar, modals)
+│       └── style.css           # Complete stylesheet (1100+ lines)
 │
 ├── config.php                  # Database connection (PDO) + helper functions
-├── database.sql                # MySQL database schema
-├── index.php                   # Homepage — news feed, stories, create post, likes, comments
+├── database.sql                # MySQL database schema (6 tables)
+├── index.php                   # Homepage — news feed, stories, posts, sidebars
 ├── login.php                   # Login page with email/password authentication
-├── logout.php                  # Session destroy and redirect to login
 ├── signup.php                  # User registration with form validation
+├── logout.php                  # Logout confirmation + goodbye page
+├── profile.php                 # User profile — cover, bio, posts, friends
+├── friends.php                 # Friend requests, friend list, suggestions
+├── chat.php                    # Messenger — conversations, chat bubbles, emoji
+├── search.php                  # Search users by name/email
+├── settings.php                # Edit profile, change password, delete account
 └── README.md                   # Project documentation
 ```
 
@@ -46,19 +58,19 @@ facebook/
 
 ## 🗄️ Database Schema
 
-The project uses **5 tables** in the `facebook_clone` database:
+The project uses **6 tables** in the `facebook_clone` database:
 
 ```
-┌─────────────────┐     ┌─────────────────┐
-│     users        │     │     posts        │
-├─────────────────┤     ├─────────────────┤
-│ id (PK)          │◄───┤ user_id (FK)     │
-│ first_name       │     │ id (PK)          │
-│ last_name        │     │ content          │
-│ email (UNIQUE)   │     │ image            │
-│ password         │     │ created_at       │
-│ gender           │     └────────┬─────────┘
-│ birthdate        │              │
+┌─────────────────┐     ┌─────────────────┐     ┌──────────────────┐
+│     users        │     │     posts        │     │    messages       │
+├─────────────────┤     ├─────────────────┤     ├──────────────────┤
+│ id (PK)          │◄───┤ user_id (FK)     │     │ id (PK)          │
+│ first_name       │     │ id (PK)          │     │ sender_id (FK)   │
+│ last_name        │     │ content          │     │ receiver_id (FK) │
+│ email (UNIQUE)   │     │ image            │     │ message          │
+│ password         │     │ created_at       │     │ is_read          │
+│ gender           │     └────────┬─────────┘     │ created_at       │
+│ birthdate        │              │               └──────────────────┘
 │ profile_pic      │     ┌────────┴─────────┐
 │ cover_pic        │     │                  │
 │ bio              │     ▼                  ▼
@@ -135,7 +147,12 @@ The project uses **5 tables** in the `facebook_clone` database:
 | **Login** | `/login.php` | Email & password login form |
 | **Sign Up** | `/signup.php` | Registration with name, email, password, gender, birthdate |
 | **Home Feed** | `/index.php` | Main dashboard — stories, post creation, feed, sidebars |
-| **Logout** | `/logout.php` | Destroys session and redirects to login |
+| **Profile** | `/profile.php` | User profile with cover photo, bio, posts, friends list |
+| **Friends** | `/friends.php` | Friend requests (accept/reject), friend list, people suggestions |
+| **Messenger** | `/chat.php` | Chat conversations, real-time messaging, emoji, unread badges |
+| **Search** | `/search.php` | Search users by name or email, friend status indicators |
+| **Settings** | `/settings.php` | Edit profile, change password, delete account |
+| **Logout** | `/logout.php` | Confirmation page → goodbye screen |
 
 ---
 
@@ -158,6 +175,7 @@ The project uses **5 tables** in the `facebook_clone` database:
 - ✅ **XSS Prevention** — All user output escaped via `htmlspecialchars()`
 - ✅ **Session Management** — PHP sessions for authentication
 - ✅ **CSRF-safe Actions** — Post deletion requires ownership verification
+- ✅ **Account Deletion** — Requires typing "DELETE" to confirm
 
 ---
 
@@ -167,6 +185,11 @@ The project uses **5 tables** in the `facebook_clone` database:
 > - 🔐 **Login Page** — Clean, centered Facebook-style login form
 > - 📝 **Sign Up Page** — Full registration with gender and birthdate
 > - 🏠 **Home Feed** — Complete Facebook-like layout with stories, posts, and sidebars
+> - 👤 **Profile Page** — User profile with cover photo, bio, and posts
+> - 👥 **Friends Page** — Friend requests, friend list, and suggestions
+> - 💬 **Messenger** — Chat interface with conversations and real-time messaging
+> - ⚙️ **Settings** — Edit profile, change password, account management
+> - 🔍 **Search** — Find users by name or email
 
 ---
 

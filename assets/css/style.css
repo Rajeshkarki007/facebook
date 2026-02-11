@@ -1,54 +1,110 @@
 /* ============================
-   Facebook Clone - Bootstrap Overrides & Custom Styles
-   Only Facebook-specific styles that Bootstrap doesn't provide
+   Facebook Clone – Premium Custom Styles
+   Complements Bootstrap 5
    ============================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* ---- CSS Variables ---- */
+/* ──────────────── CSS Variables ──────────────── */
 :root {
     --fb-blue: #1877f2;
     --fb-blue-hover: #166fe5;
+    --fb-blue-light: rgba(24, 119, 242, 0.1);
     --fb-green: #42b72a;
     --fb-green-hover: #36a420;
     --bg-primary: #f0f2f5;
+    --bg-white: #ffffff;
+    --text-primary: #050505;
     --text-secondary: #65676b;
     --border-color: #dadde1;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 2px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.15);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 50px;
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ---- Base Overrides ---- */
+/* ──────────────── Base Overrides ──────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-primary);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--text-primary);
+    line-height: 1.5;
 }
 
 a {
-    transition: all 0.2s ease;
+    transition: var(--transition);
+    text-decoration: none;
 }
 
-/* ---- Auth Page ---- */
+a:hover {
+    text-decoration: none;
+}
+
+::selection {
+    background: var(--fb-blue-light);
+    color: var(--fb-blue);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bcc0c4;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8a8d91;
+}
+
+/* ============================
+   AUTH PAGES (Login & Signup)
+   ============================ */
 .auth-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #f0f2f5 0%, #e4e6eb 100%);
+    background: linear-gradient(160deg, #f0f2f5 0%, #e4e6eb 50%, #d8dadf 100%);
+    padding: 40px 0;
 }
 
 .fb-logo {
-    font-size: 3.5rem;
+    font-size: 3.8rem;
     font-weight: 800;
     color: var(--fb-blue);
-    letter-spacing: -1.5px;
-    text-shadow: 0 2px 4px rgba(24, 119, 242, 0.2);
+    letter-spacing: -2px;
+    text-shadow: 0 2px 8px rgba(24, 119, 242, 0.15);
+    line-height: 1.1;
 }
 
 .auth-card {
-    animation: slideUp 0.5s ease;
+    background: var(--bg-white);
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1) !important;
 }
 
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(24px);
     }
 
     to {
@@ -57,59 +113,81 @@ a {
     }
 }
 
+/* ---- Buttons ---- */
 .btn-fb-blue {
-    background-color: var(--fb-blue);
-    border-color: var(--fb-blue);
+    background: var(--fb-blue);
+    border: none;
     color: #fff;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 12px;
-    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
-    transition: all 0.2s ease;
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.35);
+    transition: var(--transition);
+    letter-spacing: 0.01em;
 }
 
-.btn-fb-blue:hover {
-    background-color: var(--fb-blue-hover);
-    border-color: var(--fb-blue-hover);
+.btn-fb-blue:hover,
+.btn-fb-blue:focus {
+    background: var(--fb-blue-hover);
     color: #fff;
-    box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+    box-shadow: 0 6px 20px rgba(24, 119, 242, 0.45);
     transform: translateY(-1px);
+}
+
+.btn-fb-blue:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(24, 119, 242, 0.3);
 }
 
 .btn-fb-green {
-    background-color: var(--fb-green);
-    border-color: var(--fb-green);
+    background: var(--fb-green);
+    border: none;
     color: #fff;
-    font-weight: 600;
-    font-size: 1.05rem;
+    font-weight: 700;
+    font-size: 1.08rem;
     padding: 12px 40px;
-    box-shadow: 0 4px 12px rgba(66, 183, 42, 0.3);
-    transition: all 0.2s ease;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 12px rgba(66, 183, 42, 0.35);
+    transition: var(--transition);
 }
 
-.btn-fb-green:hover {
-    background-color: var(--fb-green-hover);
-    border-color: var(--fb-green-hover);
+.btn-fb-green:hover,
+.btn-fb-green:focus {
+    background: var(--fb-green-hover);
     color: #fff;
-    box-shadow: 0 6px 20px rgba(66, 183, 42, 0.4);
+    box-shadow: 0 6px 20px rgba(66, 183, 42, 0.45);
     transform: translateY(-1px);
 }
 
+.btn-fb-green:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(66, 183, 42, 0.3);
+}
+
+/* ---- Form Controls ---- */
 .form-control-fb {
     padding: 14px 16px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
     font-size: 1rem;
     background: #f5f6f7;
-    transition: all 0.2s ease;
+    transition: var(--transition);
+    color: var(--text-primary);
+}
+
+.form-control-fb::placeholder {
+    color: #8a8d91;
 }
 
 .form-control-fb:focus {
     border-color: var(--fb-blue);
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.15);
+    box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.12);
+    outline: none;
 }
 
+/* ---- Divider ---- */
 .divider-text {
     display: flex;
     align-items: center;
@@ -137,38 +215,52 @@ a {
     align-items: center;
     justify-content: space-between;
     padding: 10px 14px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition);
+    font-weight: 500;
+    color: var(--text-primary);
 }
 
 .gender-option:hover {
     border-color: var(--fb-blue);
+    background: var(--fb-blue-light);
 }
 
-.gender-option input:checked+.gender-option,
 .gender-option:has(input:checked) {
     border-color: var(--fb-blue);
-    background: rgba(24, 119, 242, 0.05);
+    background: var(--fb-blue-light);
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.15);
+}
+
+.gender-option input[type="radio"] {
+    accent-color: var(--fb-blue);
+    width: 18px;
+    height: 18px;
 }
 
 /* ============================
    NAVBAR
    ============================ */
 .navbar-fb {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0 16px;
     height: 56px;
+    z-index: 1030;
+    background: var(--bg-white) !important;
+    border-bottom: none;
 }
 
 .navbar-fb .navbar-brand {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    color: var(--fb-blue);
-    letter-spacing: -1px;
+    color: var(--fb-blue) !important;
+    letter-spacing: -1.5px;
+    text-shadow: none;
 }
 
+/* ---- Search ---- */
 .search-fb {
     position: relative;
 }
@@ -176,17 +268,23 @@ a {
 .search-fb .form-control {
     border: none;
     background: var(--bg-primary);
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     padding: 10px 16px 10px 40px;
     font-size: 0.9rem;
-    width: 250px;
-    transition: all 0.2s ease;
+    width: 240px;
+    transition: var(--transition);
+    color: var(--text-primary);
+}
+
+.search-fb .form-control::placeholder {
+    color: var(--text-secondary);
 }
 
 .search-fb .form-control:focus {
     width: 300px;
     background: #e4e6eb;
     box-shadow: none;
+    outline: none;
 }
 
 .search-fb .search-icon {
@@ -197,31 +295,34 @@ a {
     color: var(--text-secondary);
     font-size: 0.9rem;
     z-index: 5;
+    pointer-events: none;
 }
 
-/* Nav Tabs */
+/* ---- Nav Tabs (Center icons) ---- */
 .nav-tab-fb {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px 32px;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     color: var(--text-secondary);
-    font-size: 1.3rem;
-    transition: all 0.2s ease;
+    font-size: 1.35rem;
+    transition: var(--transition);
     position: relative;
     text-decoration: none;
     height: 48px;
+    margin: 4px 0;
 }
 
 .nav-tab-fb:hover {
     background: var(--bg-primary);
-    color: var(--text-secondary);
+    color: var(--fb-blue);
     text-decoration: none;
 }
 
 .nav-tab-fb.active {
     color: var(--fb-blue);
+    background: transparent;
 }
 
 .nav-tab-fb.active::after {
@@ -235,55 +336,64 @@ a {
     border-radius: 3px 3px 0 0;
 }
 
-/* Profile Button */
+/* ---- Navbar Profile ---- */
 .navbar-profile-btn {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 4px 12px 4px 4px;
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     background: var(--bg-primary);
     border: none;
     font-weight: 600;
     font-size: 0.9rem;
-    transition: all 0.2s ease;
+    transition: var(--transition);
+    color: var(--text-primary);
+    cursor: pointer;
 }
 
 .navbar-profile-btn:hover {
     background: #e4e6eb;
 }
 
-/* Avatar Placeholder */
+.navbar-profile-btn::after {
+    display: none;
+}
+
+/* ---- Avatar ---- */
 .avatar-circle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--fb-blue), #4a90d9);
+    background: linear-gradient(135deg, var(--fb-blue) 0%, #4a90d9 100%);
     color: #fff;
     font-weight: 700;
     flex-shrink: 0;
+    user-select: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .avatar-circle-sm {
     width: 32px;
     height: 32px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 
 .avatar-circle-md {
     width: 40px;
     height: 40px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .avatar-circle-lg {
     width: 44px;
     height: 44px;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
-/* Icon Button */
+/* ---- Icon Buttons ---- */
 .btn-icon-fb {
     width: 40px;
     height: 40px;
@@ -293,12 +403,16 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
-    transition: all 0.2s ease;
+    font-size: 1.15rem;
+    transition: var(--transition);
+    color: var(--text-primary);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .btn-icon-fb:hover {
     background: #e4e6eb;
+    color: var(--text-primary);
 }
 
 /* ============================
@@ -306,15 +420,18 @@ a {
    ============================ */
 .homepage-layout {
     padding-top: 16px;
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
-/* ---- Sidebar ---- */
+/* ---- Left Sidebar ---- */
 .sidebar-left {
     position: sticky;
     top: 72px;
     height: calc(100vh - 72px);
     overflow-y: auto;
     scrollbar-width: none;
+    padding-bottom: 20px;
 }
 
 .sidebar-left::-webkit-scrollbar {
@@ -326,11 +443,11 @@ a {
     align-items: center;
     gap: 14px;
     padding: 10px 12px;
-    border-radius: 8px;
-    color: #050505;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
     font-weight: 500;
     font-size: 0.95rem;
-    transition: all 0.2s ease;
+    transition: var(--transition);
     cursor: pointer;
     text-decoration: none;
 }
@@ -338,7 +455,7 @@ a {
 .sidebar-item:hover {
     background: #e4e6eb;
     text-decoration: none;
-    color: #050505;
+    color: var(--text-primary);
 }
 
 .sidebar-icon {
@@ -353,11 +470,14 @@ a {
     color: #fff;
 }
 
-/* ---- Stories ---- */
+/* ============================
+   STORIES
+   ============================ */
 .stories-scroll {
     overflow-x: auto;
     scrollbar-width: none;
     gap: 10px;
+    padding-bottom: 4px;
 }
 
 .stories-scroll::-webkit-scrollbar {
@@ -367,25 +487,40 @@ a {
 .story-card {
     min-width: 115px;
     height: 200px;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition);
     flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
 }
 
 .story-card:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
+    box-shadow: var(--shadow-md);
 }
 
 .story-bg {
     width: 100%;
     height: 100%;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: flex-end;
     padding: 12px 8px;
+    position: relative;
+}
+
+.story-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    pointer-events: none;
 }
 
 .story-avatar {
@@ -402,20 +537,24 @@ a {
     background: linear-gradient(135deg, var(--fb-blue), #4a90d9);
     color: #fff;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .story-name {
     color: #fff;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    position: relative;
 }
 
 .create-story {
     min-width: 115px;
     height: 200px;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     border: 2px dashed var(--border-color);
     display: flex;
     flex-direction: column;
@@ -423,8 +562,8 @@ a {
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    background: #fff;
+    transition: var(--transition);
+    background: var(--bg-white);
     flex-shrink: 0;
 }
 
@@ -433,15 +572,18 @@ a {
     border-color: var(--fb-blue);
 }
 
-/* ---- Create Post ---- */
+/* ============================
+   CREATE POST BOX
+   ============================ */
 .create-post-input {
     border: none;
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     background: var(--bg-primary);
     padding: 12px 16px;
     cursor: pointer;
     font-size: 1rem;
-    transition: all 0.2s ease;
+    transition: var(--transition);
+    color: var(--text-secondary);
 }
 
 .create-post-input:hover,
@@ -449,17 +591,22 @@ a {
     background: #e4e6eb;
     box-shadow: none;
     border-color: transparent;
+    color: var(--text-secondary);
 }
 
-/* ---- Post Card ---- */
+/* ============================
+   POST CARD
+   ============================ */
 .post-card {
-    animation: fadeIn 0.4s ease;
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none !important;
+    overflow: hidden;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(10px);
     }
 
     to {
@@ -475,9 +622,9 @@ a {
     justify-content: center;
     gap: 8px;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition);
     font-weight: 600;
     color: var(--text-secondary);
     border: none;
@@ -496,13 +643,20 @@ a {
     color: var(--fb-blue);
 }
 
-/* ---- Right Sidebar ---- */
+.post-action-btn.liked:hover {
+    background: var(--fb-blue-light);
+}
+
+/* ============================
+   RIGHT SIDEBAR
+   ============================ */
 .sidebar-right {
     position: sticky;
     top: 72px;
     height: calc(100vh - 72px);
     overflow-y: auto;
     scrollbar-width: none;
+    padding-bottom: 20px;
 }
 
 .sidebar-right::-webkit-scrollbar {
@@ -516,21 +670,29 @@ a {
     width: 10px;
     height: 10px;
     background: #31a24c;
-    border: 2px solid #fff;
+    border: 2px solid var(--bg-white);
     border-radius: 50%;
 }
 
-/* ---- Modal ---- */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* ============================
+   MODAL (Create Post)
+   ============================ */
 .modal-fb .modal-content {
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     border: none;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
 }
 
 .modal-fb .modal-header {
     border-bottom: 1px solid var(--border-color);
     justify-content: center;
     position: relative;
+    padding: 16px 20px;
 }
 
 .modal-fb .modal-header .btn-close {
@@ -538,8 +700,17 @@ a {
     right: 16px;
     background-color: var(--bg-primary);
     border-radius: 50%;
-    padding: 8px;
+    padding: 10px;
     opacity: 1;
+    transition: var(--transition);
+}
+
+.modal-fb .modal-header .btn-close:hover {
+    background: #e4e6eb;
+}
+
+.modal-fb .modal-body {
+    padding: 16px 20px;
 }
 
 .modal-fb .modal-body textarea {
@@ -547,29 +718,101 @@ a {
     resize: none;
     min-height: 120px;
     font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.modal-fb .modal-body textarea::placeholder {
+    color: var(--text-secondary);
 }
 
 .modal-fb .modal-body textarea:focus {
     box-shadow: none;
+    outline: none;
 }
 
-/* ---- Comment Bubble ---- */
+/* ============================
+   COMMENT BUBBLE
+   ============================ */
 .comment-bubble {
     background: var(--bg-primary);
     border-radius: 18px;
     padding: 8px 14px;
+    transition: var(--transition);
 }
 
-/* ---- Dropdown fix ---- */
+.comment-bubble:hover {
+    background: #e4e6eb;
+}
+
+/* ============================
+   DROPDOWN
+   ============================ */
 .dropdown-menu-fb {
     border: none;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
     padding: 12px;
     min-width: 300px;
+    animation: dropdownFade 0.2s ease;
 }
 
-/* ---- Responsive ---- */
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-menu-fb .dropdown-item {
+    transition: var(--transition);
+}
+
+.dropdown-menu-fb .dropdown-item:hover {
+    background: var(--bg-primary);
+}
+
+/* ============================
+   ALERT OVERRIDES
+   ============================ */
+.alert {
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.alert-danger {
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.alert-success {
+    background: #f0fdf4;
+    color: #166534;
+}
+
+/* ============================
+   CARD OVERRIDES
+   ============================ */
+.card {
+    border: none;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
 @media (max-width: 1200px) {
     .sidebar-right-col {
         display: none !important;
@@ -583,6 +826,24 @@ a {
 
     .nav-tab-fb {
         padding: 8px 16px;
+    }
+
+    .fb-logo {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-page {
+        padding: 20px 10px;
+    }
+
+    .auth-card {
+        padding: 1.5rem !important;
+    }
+
+    .fb-logo {
+        font-size: 2.5rem;
     }
 }
 
@@ -604,4 +865,332 @@ a {
         min-width: 100px;
         height: 170px;
     }
+
+    .create-story {
+        min-width: 100px;
+        height: 170px;
+    }
+
+    .btn-fb-green {
+        padding: 10px 24px;
+        font-size: 1rem;
+    }
+
+    .post-action-btn {
+        font-size: 0.8rem;
+        gap: 4px;
+    }
+}
+
+/* ============================
+   PROFILE PAGE
+   ============================ */
+.profile-page {
+    background: var(--bg-primary);
+    min-height: 100vh;
+}
+
+.profile-cover {
+    height: 350px;
+    background: linear-gradient(135deg, #1877f2 0%, #42b72a 50%, #f7b928 100%);
+    position: relative;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    max-width: 940px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.profile-cover-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.15));
+}
+
+.profile-header {
+    background: var(--bg-white);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    padding: 0 32px 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+    z-index: 10;
+}
+
+.profile-tabs {
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.profile-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.profile-tab {
+    padding: 16px 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    white-space: nowrap;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.profile-tab:hover {
+    background: var(--bg-primary);
+    color: var(--fb-blue);
+    text-decoration: none;
+}
+
+.profile-tab.active {
+    color: var(--fb-blue);
+}
+
+.profile-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--fb-blue);
+    border-radius: 3px 3px 0 0;
+}
+
+/* ============================
+   FRIEND CARDS
+   ============================ */
+.friend-card {
+    transition: var(--transition);
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.friend-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================
+   SETTINGS PAGE
+   ============================ */
+.settings-section {
+    margin-bottom: 24px;
+}
+
+/* ============================
+   RESPONSIVE: Profile
+   ============================ */
+@media (max-width: 768px) {
+    .profile-cover {
+        height: 200px;
+        border-radius: 0;
+    }
+
+    .profile-header {
+        padding: 0 16px;
+        border-radius: 0;
+    }
+
+    .profile-tab {
+        padding: 12px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================
+   CHAT / MESSENGER
+   ============================ */
+.chat-container {
+    background: var(--bg-white);
+}
+
+.chat-sidebar {
+    width: 360px;
+    border-right: 1px solid var(--border-color);
+    background: var(--bg-white);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 56px);
+}
+
+.chat-list {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.chat-contact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition);
+    border-radius: var(--radius-sm);
+    margin: 2px 8px;
+}
+
+.chat-contact:hover {
+    background: var(--bg-primary);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.chat-contact.active {
+    background: var(--fb-blue-light);
+}
+
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--bg-white);
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-white);
+    min-height: 60px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: var(--bg-white);
+}
+
+.chat-bubble {
+    max-width: 65%;
+    padding: 8px 14px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    animation: fadeIn 0.2s ease;
+}
+
+.chat-bubble-mine {
+    background: var(--fb-blue);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-bubble-theirs {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-bottom-left-radius: 4px;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-white);
+}
+
+.min-width-0 {
+    min-width: 0;
+}
+
+/* ---- Responsive Chat ---- */
+@media (max-width: 768px) {
+    .chat-sidebar {
+        width: 100%;
+    }
+
+    .chat-bubble {
+        max-width: 80%;
+    }
+}
+
+/* ============================
+   LOGOUT MODAL (Blur Backdrop)
+   ============================ */
+.modal-backdrop-blur {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.45) !important;
+}
+
+.logout-modal .modal-content {
+    border: none;
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: modalSlideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideDown {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.logout-modal .modal-body {
+    padding: 32px;
+    text-align: center;
+}
+
+.logout-modal .logout-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #dc2626;
+    margin-bottom: 16px;
+}
+
+.logout-modal .btn-logout-confirm {
+    background: #dc2626;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.logout-modal .btn-logout-confirm:hover {
+    background: #b91c1c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
+}
+
+.logout-modal .btn-logout-cancel {
+    background: var(--bg-primary);
+    border: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.logout-modal .btn-logout-cancel:hover {
+    background: #e4e6eb;
 }
